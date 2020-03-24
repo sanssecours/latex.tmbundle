@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # -- Imports -------------------------------------------------------------------
 
 require ENV['TM_SUPPORT_PATH'] + '/lib/exit_codes'
