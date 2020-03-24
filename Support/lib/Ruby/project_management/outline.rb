@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # -- Imports -------------------------------------------------------------------
 
 require 'erb'
@@ -128,10 +130,10 @@ module Outline
     private
 
     PART = '(part|chapter|section|subsection|subsubsection|paragraph|' \
-           'subparagraph)\*?'.freeze
-    COMMENT = '(?:%.*\n[ \t]*)?'.freeze
-    OPTIONS = '(?>\[(.*?)\])'.freeze
-    ARGUMENT = '\{([^{}]*(?:\{[^}]*\}[^}]*?)*)\}'.freeze
+           'subparagraph)\*?'
+    COMMENT = '(?:%.*\n[ \t]*)?'
+    OPTIONS = '(?>\[(.*?)\])'
+    ARGUMENT = '\{([^{}]*(?:\{[^}]*\}[^}]*?)*)\}'
 
     PART_REGEX = /\\#{PART}#{COMMENT}(?:#{OPTIONS}|#{ARGUMENT})/.freeze
     INCLUDE_REGEX = /\\(?:input|include)#{COMMENT}(?>\{([^}#]*)\})/.freeze
