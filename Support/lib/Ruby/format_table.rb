@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# frozen_string_literal: true
+
 # rubocop: disable Lint/MissingCopEnableDirective
 # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
 

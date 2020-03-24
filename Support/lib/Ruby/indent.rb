@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Return a string representing a certain level of indentation.
 #
 # This function respects the current tab settings of the user.
