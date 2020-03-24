@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Various code used by the commands of the LaTeX bundle
 #
 # Authors:: Charilaos Skiadas, Michael Sheets
