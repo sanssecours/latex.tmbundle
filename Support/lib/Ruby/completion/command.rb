@@ -11,8 +11,8 @@ require ENV['TM_BUNDLE_SUPPORT'] + '/lib/Ruby/latex'
 # Insert a command based on the current word into the document.
 def command_completion
   print(menu_choice_exit_if_empty(completions))
-rescue RuntimeError => e
-  TextMate.exit_show_tool_tip(e.message)
+rescue RuntimeError => error
+  TextMate.exit_show_tool_tip(error.message)
 end
 
 # This function returns a list of completion commands for the current file.

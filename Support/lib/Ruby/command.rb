@@ -320,8 +320,8 @@ def insert_citation(input)
   menu_items, replace_input = citations(input)
   selection = menu_choice_exit_if_empty(menu_items).slice(/^[^\s]+/)
   output_selection(selection, input, replace_input)
-rescue RuntimeError => e
-  exit_show_tool_tip(e.message)
+rescue RuntimeError => error
+  exit_show_tool_tip(error.message)
 end
 
 # ===================================
@@ -363,8 +363,8 @@ def insert_reftex_citation(input)
     exit_insert_snippet("#{replace_input ? '' : input}" \
       "\\#{cite_environment}${1:[$2]}\{#{citation}$3\}$0")
   end
-rescue RuntimeError => e
-  exit_insert_text(e.message)
+rescue RuntimeError => error
+  exit_insert_text(error.message)
 end
 
 # ======================================
@@ -381,8 +381,8 @@ def insert_label(input)
                                                          input)
   selection = menu_choice_exit_if_empty(menu_items)
   output_selection(selection, input, replace_input, 'label')
-rescue RuntimeError => e
-  exit_show_tool_tip(e.message)
+rescue RuntimeError => error
+  exit_show_tool_tip(error.message)
 end
 
 # =========================
@@ -517,8 +517,8 @@ def open_master_file
   else
     `open -a TextMate #{e_sh master}`
   end
-rescue RuntimeError => e
-  exit_show_tool_tip(e.message)
+rescue RuntimeError => error
+  exit_show_tool_tip(error.message)
 end
 
 # ==========================
@@ -555,6 +555,6 @@ def show_label_as_tooltip(input)
   labels = LaTeX.labels.find_all { |label| label.label.match(/#{input}/) }
   exit_show_tool_tip("No label found matching “#{input}”") if labels.empty?
   print(label_context(labels[0]))
-rescue RuntimeError => e
-  exit_insert_text(e.message)
+rescue RuntimeError => error
+  exit_insert_text(error.message)
 end

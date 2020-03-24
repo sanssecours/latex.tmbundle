@@ -35,3 +35,6 @@ Style/HashSyntax:
 # Allow special characters such as `é` in comments
 Style/AsciiComments:
   Enabled: false
+
+Naming/RescuedExceptionsVariableName:
+  PreferredName: error
