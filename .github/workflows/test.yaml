@@ -1,0 +1,12 @@
+name: Run LaTeX Bundle Tests
+on: push
+
+jobs:
+  build:
+    name: Install Dependencies
+    runs-on: macos-latest
+
+    steps:
+      - name: TeX Setup
+        run: |
+          true
