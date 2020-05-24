@@ -81,7 +81,7 @@ def update_marks(cache_filename, marks_to_set=[]):
     try:
         # Try to write cache data for next run
         newfiles = {filename for (filename, _, _, _) in marks_to_set}
-        if 'files_with_guttermarks'in typesetting_data:
+        if 'files_with_guttermarks' in typesetting_data:
             typesetting_data['files_with_guttermarks'].update(newfiles)
         else:
             typesetting_data['files_with_guttermarks'] = newfiles
