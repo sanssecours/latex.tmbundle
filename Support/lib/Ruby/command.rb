@@ -483,9 +483,8 @@ def open_file(location)
     possible_files = Dir["#{location}*"]
     filepath = possible_files.pop unless possible_files.empty?
   end
-  if filepath.empty?
+  filepath.empty? && \
     exit_show_tool_tip("Could not locate file for path “#{location}”")
-  end
   `open #{e_sh filepath}`
 end
 
