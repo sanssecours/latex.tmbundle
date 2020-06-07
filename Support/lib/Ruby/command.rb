@@ -454,7 +454,7 @@ def locate_included_item(input)
   option = '(?>\[.*?\])?'
   file = '(?>\{(.*?)\})'
   match = input.scan(/#{environment}#{comment}#{option}#{comment}#{file}/m)
-  match.empty? ? '' : match.pop.pop.gsub(/(^\")?(\"$)?/, '')
+  match.empty? ? '' : match.pop.pop.gsub(/(^")?("$)?/, '')
 end
 
 # Get the currently selected text in TextMate

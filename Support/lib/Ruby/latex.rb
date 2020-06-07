@@ -441,7 +441,7 @@ module LaTeX
     def bib_entries(filepath)
       raise "Could not locate file: #{filepath}" unless file?(filepath)
 
-      entries = File.read(filepath).scan(/^\s*@[^\{]*\{.*?(?=\n[ \t]*@|\z)/m)
+      entries = File.read(filepath).scan(/^\s*@[^{]*\{.*?(?=\n[ \t]*@|\z)/m)
       entries.map { |entry| entry.strip.gsub(/(?:^\s*%.*|\n)+$/m, '') }
     end
 
@@ -626,7 +626,7 @@ module LaTeX
     def bibentry_type_key_rest(bib_entry)
       scanner = StringScanner.new(bib_entry)
       scanner.scan(/\s*@/)
-      bibtype = scanner.scan(/[^\s\{]+/)
+      bibtype = scanner.scan(/[^\s{]+/)
       scanner.scan(/\s*\{\s*/)
       citekey = scanner.scan(/[^\s,]+(?=\s*,)/)
       scanner.scan(/\s*,\s*/)
@@ -734,7 +734,7 @@ module LaTeX
     end
 
     def consume_value_variable(scanner, first_char, variables)
-      scanned = scanner.scan(/[\w]*/)
+      scanned = scanner.scan(/\w*/)
       scanned.nil? ? nil : variables[first_char + scanned].to_s
     end
 
@@ -883,8 +883,8 @@ module LaTeX
         label_list << Label.new(:file => filename, :line => line,
                                 :label => groups[0], :contents => text)
       end
-      scanner.extractors[/.*?\[.*label=(.*?)\,.*\]/] = label_extractor
-      scanner.extractors[/^[^%]*\\label\{([^\}]*)\}/] = label_extractor
+      scanner.extractors[/.*?\[.*label=(.*?),.*\]/] = label_extractor
+      scanner.extractors[/^[^%]*\\label\{([^}]*)\}/] = label_extractor
       scanner.recursive_scan
       label_list
     end
@@ -929,7 +929,7 @@ module LaTeX
       private
 
       def add_bibitem_scan(scanner)
-        bibitem_regexp = /^[^%]*\\bibitem(?:\[[^\]]*\])?\{([^\}]*)\}(.*)/
+        bibitem_regexp = /^[^%]*\\bibitem(?:\[[^\]]*\])?\{([^}]*)\}(.*)/
         scanner.extractors[bibitem_regexp] = proc do |_, _, groups, _|
           scanner.cites << Citation.new('citekey' => groups[0],
                                         'cite_data' => groups[1])
@@ -941,8 +941,8 @@ module LaTeX
         # We ignore bibliography files located on Windows drives by not
         # +matching+ any path which starts with a single letter followed by a
         # “:” e.g.: “c:”
-        regexes = [/^[^%]*\\bibliography\s*\{(?![a-zA-Z]:)([^\}]*)\}/,
-                   /^[^%]*\\addbibresource\s*\{(?![a-zA-Z]:)([^\}]*)\}/]
+        regexes = [/^[^%]*\\bibliography\s*\{(?![a-zA-Z]:)([^}]*)\}/,
+                   /^[^%]*\\addbibresource\s*\{(?![a-zA-Z]:)([^}]*)\}/]
         extractor = proc do |_, _, groups, _|
           (groups[0].split(',') << ENV['TM_LATEX_BIB']).compact.each do |bib|
             file = LaTeX.find_file(bib.strip, 'bib', File.dirname(scanner.root))
