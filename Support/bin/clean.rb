@@ -156,7 +156,7 @@ class String
   #   >> '${NAME/-/o/}'.replace_name('- - -')
   #   => 'o\\ o\\ o'
   def replace_name(name, regex_escape_name = true)
-    gsub(%r{\${NAME(?:/([^/]+)/([^/]+)/)?}}).each do |_match|
+    gsub(%r{\$\{NAME(?:/([^/]+)/([^/]+)/)?\}}).each do |_match|
       pattern = Regexp.last_match(1)
       replacement = Regexp.last_match(2)
       name = name.gsub(pattern, replacement) if pattern && replacement
