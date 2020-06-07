@@ -7,17 +7,9 @@
 # ------------------------------------------------------------------------------
 
 # Enable most recent rules
-Lint/RaiseException:
-  Enabled: true
-Lint/StructNewOverride:
-  Enabled: true
-Style/HashEachMethods:
-  Enabled: true
-Style/HashTransformKeys:
-  Enabled: true
-Style/HashTransformValues:
-  Enabled: true
-
+AllCops:
+  NewCops: enable
+  
 # -- Ruby 1.8 ------------------------------------------------------------------
 
 # We need the following rules to keep compatibility with ruby versions pre 1.9
