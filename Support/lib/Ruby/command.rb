@@ -75,11 +75,8 @@ def filter_items_replace_input(items, input)
   # Check if we should use the input as part of the choice
   match_input = input.match(/^(?:$|.*[{}~,])/).nil?
   if match_input
-    items = if ENV['TM_LATEX_SEARCH_CASE_SENSITIVE']
-              items.grep(/#{input}/)
-            else
-              items.grep(/#{input}/i)
-            end
+    modifier = Regexp::IGNORECASE unless ENV['TM_LATEX_SEARCH_CASE_SENSITIVE']
+    items = items.grep(Regexp.new(input, modifier))
   end
   [items, match_input]
 end
